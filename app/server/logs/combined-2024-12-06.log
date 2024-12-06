@@ -1,0 +1,32 @@
+2024-12-06 10:41:09 [[32minfo[39m]: Incoming Request: GET /api/ from IP ::ffff:127.0.0.1
+2024-12-06 10:41:09 [[32minfo[39m]: Response: GET /api/ - 500 [12ms]
+2024-12-06 10:41:19 [[32minfo[39m]: Incoming Request: GET / from IP ::ffff:127.0.0.1
+2024-12-06 10:41:19 [[32minfo[39m]: Response: GET / - 500 [3ms]
+2024-12-06 10:44:04 [[32minfo[39m]: Incoming Request: GET / from IP ::ffff:127.0.0.1
+2024-12-06 10:44:04 [[32minfo[39m]: Response: GET / - 404 [8ms]
+2024-12-06 10:44:08 [[32minfo[39m]: Incoming Request: GET /dev from IP ::ffff:127.0.0.1
+2024-12-06 10:44:08 [[32minfo[39m]: Response: GET /dev - 404 [2ms]
+2024-12-06 10:44:19 [[32minfo[39m]: Incoming Request: GET /devcenter/ from IP ::ffff:127.0.0.1
+2024-12-06 10:44:19 [[32minfo[39m]: Response: GET /devcenter/ - 404 [2ms]
+2024-12-06 10:44:57 [[32minfo[39m]: Incoming Request: GET /devcenter/ from IP ::ffff:127.0.0.1
+2024-12-06 10:44:57 [[32minfo[39m]: Response: GET /devcenter/ - 404 [9ms]
+2024-12-06 10:45:09 [[32minfo[39m]: Incoming Request: GET /devcenter/ from IP ::ffff:127.0.0.1
+2024-12-06 10:45:09 [[32minfo[39m]: Response: GET /devcenter/ - 404 [10ms]
+2024-12-06 10:45:28 [[32minfo[39m]: Incoming Request: GET /devcenter/example from IP ::ffff:127.0.0.1
+2024-12-06 10:45:28 [[32minfo[39m]: Response: GET /devcenter/example - 200 [4ms]
+2024-12-06 10:45:28 [[32minfo[39m]: Incoming Request: GET /favicon.ico from IP ::ffff:127.0.0.1
+2024-12-06 10:45:28 [[32minfo[39m]: Response: GET /favicon.ico - 404 [2ms]
+2024-12-06 10:50:04 [[32minfo[39m]: Incoming Request: GET /devcenter/example from IP ::ffff:127.0.0.1
+2024-12-06 10:50:04 [[32minfo[39m]: Response: GET /devcenter/example - 404 [9ms]
+2024-12-06 10:50:09 [[32minfo[39m]: Incoming Request: GET /devcenter/login from IP ::ffff:127.0.0.1
+2024-12-06 10:50:09 [[32minfo[39m]: Response: GET /devcenter/login - 500 [3ms]
+2024-12-06 10:51:05 [[32minfo[39m]: Incoming Request: GET /devcenter/login from IP ::ffff:127.0.0.1
+2024-12-06 10:51:05 [[32minfo[39m]: Response: GET /devcenter/login - 500 [83ms]
+2024-12-06 10:51:48 [[32minfo[39m]: Incoming Request: GET /devcenter/login from IP ::ffff:127.0.0.1
+2024-12-06 10:51:48 [[32minfo[39m]: Response: GET /devcenter/login - 500 [3ms]
+2024-12-06 10:52:05 [[32minfo[39m]: Incoming Request: GET /devcenter/login from IP ::ffff:127.0.0.1
+2024-12-06 10:52:05 [[32minfo[39m]: Response: GET /devcenter/login - 500 [2ms]
+2024-12-06 10:53:17 [[32minfo[39m]: Incoming Request: GET /devcenter/login from IP ::ffff:127.0.0.1
+2024-12-06 10:53:17 [[32minfo[39m]: Response: GET /devcenter/login - 500 [3ms]
+2024-12-06 10:53:41 [[32minfo[39m]: Incoming Request: GET /devcenter/login from IP ::ffff:127.0.0.1
+2024-12-06 10:53:41 [[32minfo[39m]: Response: GET /devcenter/login - 500 [4ms]

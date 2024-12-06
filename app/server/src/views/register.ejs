@@ -1,0 +1,45 @@
+<% layout("/common/layout") %>
+
+<h1 class="title-text centered-text">Register</h1>
+
+<form action="/devcenter/register" method="post" class="main-form">
+  <!-- Username -->
+  <div class="form-group">
+    <label for="username">Username:</label>
+    <input
+      type="text"
+      id="username"
+      name="username"
+      placeholder="Enter your username"
+      required
+    />
+  </div>
+
+  <!-- Email -->
+  <div class="form-group">
+	<label for="email">Email:</label>
+	<input
+	  type="email"
+	  id="email"
+	  name="email"
+	  placeholder="Enter your email"
+	  required
+	/>
+
+  <!-- Password -->
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      placeholder="Enter a secure password"
+      required
+    />
+  </div>
+
+  <!-- Submit Button -->
+  <div class="form-group">
+    <button type="submit" class="btn-primary">Register</button>
+  </div>
+</form>

@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title || 'Chronoria' %></title>
+    <title><%= title || "Chronoria" %></title>
+<link rel="stylesheet" href="/assets/styles/main.css">
   </head>
   <body>
-    <% include ./partials/header.ejs %>
+    <%- include('../partials/header') %>
     <main>
-      <%- body %> <!-- This is where page-specific content will be injected -->
+      <%- body %>
     </main>
-    <% include ./partials/footer.ejs %>
+    <%- include('../partials/footer') %>
   </body>
 </html>

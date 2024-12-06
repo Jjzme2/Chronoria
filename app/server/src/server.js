@@ -1,10 +1,13 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import passport from 'passport';
-import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
-import globalVars from './middleware/globalVariables.js';
+import path from "path";
+import { fileURLToPath } from "url";
+import express from "express";
+import engine from "ejs-mate";
+import bodyParser from "body-parser";
+import cors from "cors";
+import dotenv from "dotenv";
+import passport from "passport";
+import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
+import globalVars from "./middleware/globalVariables.js";
 import {
 	requestLogger,
 	// logEvent,
@@ -12,18 +15,25 @@ import {
 	// logCriticalError,
 } from "./middleware/requestLogger.js";
 
-import mainRoutes from './routes/index.js';
+import mainRoutes from "./routes/index.js";
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// EJS Templating Engine
-app.set('view engine', 'ejs');
-app.set('views', './src/views');
+// Serve Static Assets
+app.use("/assets", express.static(path.join(__dirname, "assets/")));
 
+
+// Configure EJS-Mate
+app.engine("ejs", engine);
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 // Middleware
 app.use(cors());
@@ -31,7 +41,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(globalVars);
 app.use(requestLogger);
-
 
 // app.use(passport.initialize());
 // passport.use(
@@ -58,5 +67,5 @@ app.use("/", mainRoutes);
 // });
 
 app.listen(PORT, () => {
-	  console.log(`Server is running on port ${PORT}`);
+	console.log(`Server is running on port ${PORT}`);
 });

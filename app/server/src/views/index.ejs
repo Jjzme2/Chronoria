@@ -1,3 +1,9 @@
 <%- include('./common/layout') %>
-<h1>Welcome to Chronoria!</h1>
-<p>This is the home page.</p>
+<% if (currentUser) { %>
+  <h1>Welcome to Chronoria, <%= currentUser.username %>!</h1>
+  <p>This is the home page.</p>
+<% } else { %>
+  <script>
+    window.location.href = "/devcenter/login";
+  </script>
+<% } %>

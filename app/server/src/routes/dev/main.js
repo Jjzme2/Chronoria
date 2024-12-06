@@ -4,6 +4,15 @@ import bcrypt from "bcrypt"; // For secure password hashing
 
 const router = Router();
 
+router.get("/", (req, res) => {
+	// Check if the user is logged in, and if not redirect to the login page
+	if (!req.user) {
+		return res.redirect("/devcenter/login");
+	}
+
+	res.render("index", { title: "Developer Dashboard" });
+});
+
 router.get("/login", (req, res) => {
 	res.render("login", { title: "Login" });
 });

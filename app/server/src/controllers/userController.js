@@ -35,6 +35,20 @@ const userController = {
       res.status(500).json({ error: "Failed to create user" });
     }
   },
+
+  /**
+   * Handle user logout
+   */
+  async logout(req, res) {
+    try {
+      // Clear the user session or token
+      req.session = null;
+      res.json({ message: "Logout successful" });
+    } catch (error) {
+      console.error("Logout error:", error.message);
+      res.status(500).json({ error: "Failed to logout" });
+    }
+  },
 };
 
 export default userController;

@@ -1,4 +1,5 @@
 import userService from "../services/userService.js";
+import { capitalize } from "../utils/stringUtil.js";
 
 const userController = {
   /**
@@ -33,11 +34,14 @@ const userController = {
     const { username, password, email } = req.body;
 
     try {
+      // Capitalize the username before creating the user
+      const capitalizedUsername = capitalize(username);
+
       // Delegate user creation to the service
       const newUser = await userService.createUser({
-        username,
+        username: capitalizedUsername,
         password,
-		email,
+        email,
       });
       res.status(201).json(newUser);
     } catch (error) {

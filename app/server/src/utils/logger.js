@@ -1,4 +1,5 @@
 import { createLogger, format, transports } from "winston";
+import { pool } from "./dbUtil.js";
 const { combine, timestamp, printf, colorize } = format;
 
 // Define the log format
@@ -37,6 +38,18 @@ const logger = createLogger({
 		}),
 		new transports.File({
 			filename: `logs/combined-${new Date().toISOString().split("T")[0]}.log`,
+		}),
+		new transports.Stream({
+			stream: {
+				write: async (message) => {
+					const logEntry = JSON.parse(message);
+					const { level, message: logMessage, timestamp } = logEntry;
+					await pool.query(
+						"INSERT INTO logs (level, message, timestamp) VALUES ($1, $2, $3)",
+						[level, logMessage, timestamp]
+					);
+				},
+			},
 		}),
 	],
 });

@@ -57,6 +57,12 @@ app.use(requestLogger);
 
 app.use("/", mainRoutes);
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+	console.error(err.stack);
+	res.status(500).send('Something broke!');
+});
+
 // ! DELETE: Examples
 // app.get('/api', (req, res) => {
 //   res.json({ message: 'Hello from server!' });

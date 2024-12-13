@@ -1,4 +1,8 @@
 class User {
+	/**
+	 * Constructor for the User class
+	 * @param {Object} user - The user object
+	 */
 	constructor(user) {
 		this.id = user.id;
 		this.username = user.username;

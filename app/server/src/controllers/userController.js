@@ -1,9 +1,12 @@
 import userService from "../services/userService.js";
 import { capitalize } from "../utils/stringUtil.js";
+import logger from "../utils/logger.js";
 
 const userController = {
   /**
    * Handle user login
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
    */
   async login(req, res) {
     const { username, password } = req.body;
@@ -22,13 +25,15 @@ const userController = {
       const token = userService.generateUserToken(user);
       res.json({ token });
     } catch (error) {
-      console.error("Login error:", error.message);
+      logger.error("Login error:", error.message);
       res.status(500).json({ error: "Internal server error", message: error.message });
     }
   },
 
   /**
    * Create a new user
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
    */
   async createUser(req, res) {
     const { username, password, email } = req.body;
@@ -45,13 +50,15 @@ const userController = {
       });
       res.status(201).json(newUser);
     } catch (error) {
-      console.error("User creation error:", error.message);
+      logger.error("User creation error:", error.message);
       res.status(500).json({ error: "Failed to create user", message: error.message });
     }
   },
 
   /**
    * Fetch user by ID
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
    */
   async getUserById(req, res) {
     const { id } = req.params;
@@ -63,13 +70,15 @@ const userController = {
       }
       res.json(user);
     } catch (error) {
-      console.error("Error fetching user:", error.message);
+      logger.error("Error fetching user:", error.message);
       res.status(500).json({ error: "Internal server error" });
     }
   },
 
   /**
    * Update a user
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
    */
   async updateUser(req, res) {
     const { id } = req.params;
@@ -82,13 +91,15 @@ const userController = {
       }
       res.json(updatedUser);
     } catch (error) {
-      console.error("Error updating user:", error.message);
+      logger.error("Error updating user:", error.message);
       res.status(500).json({ error: "Failed to update user" });
     }
   },
 
   /**
    * Delete a user
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
    */
   async deleteUser(req, res) {
     const { id } = req.params;
@@ -100,13 +111,15 @@ const userController = {
       }
       res.json({ message: "User deleted successfully" });
     } catch (error) {
-      console.error("Error deleting user:", error.message);
+      logger.error("Error deleting user:", error.message);
       res.status(500).json({ error: "Failed to delete user" });
     }
   },
 
   /**
    * Handle user logout
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
    */
   async logout(req, res) {
     try {
@@ -114,7 +127,7 @@ const userController = {
       req.session = null; // Adjust this if you’re not using sessions
       res.json({ message: "Logout successful" });
     } catch (error) {
-      console.error("Logout error:", error.message);
+      logger.error("Logout error:", error.message);
       res.status(500).json({ error: "Failed to logout" });
     }
   },

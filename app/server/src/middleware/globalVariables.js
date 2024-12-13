@@ -1,3 +1,9 @@
+/**
+ * Middleware to set global variables for EJS templates
+ * @param {Object} req - The request object
+ * @param {Object} res - The response object
+ * @param {Function} next - The next middleware function
+ */
 const setLocals = (req, res, next) => {
 	// Define global variables for EJS templates
 	res.locals.siteTitle = "Chronoria";

@@ -6,6 +6,13 @@ const logFormat = printf(({ level, message, timestamp }) => {
 	return `${timestamp} [${level}]: ${message}`;
 });
 
+/**
+ * Logger object for logging messages with different levels
+ * @type {Object}
+ * @property {Function} info - Log an info message
+ * @property {Function} error - Log an error message
+ * @property {Function} warn - Log a warning message
+ */
 const logger = createLogger({
 	level: "info", // Log level (info, error, warn, etc.)
 	format: combine(

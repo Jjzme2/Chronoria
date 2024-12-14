@@ -13,6 +13,7 @@ This document provides an overview of the Chronoria server-side code, including 
 - [Logging](#logging)
 - [Authentication](#authentication)
 - [Environment Variables](#environment-variables)
+- [WebSocket Integration](#websocket-integration)
 
 ## Installation
 
@@ -101,3 +102,45 @@ The server requires the following environment variables:
 - `DATABASE_URL` - The URL of the PostgreSQL database
 
 Refer to the `.env.example` file for a complete list of required environment variables.
+
+## WebSocket Integration
+
+The server includes WebSocket integration to enable real-time communication with connected clients. The WebSocket server is initialized after the HTTP server starts, and it handles incoming WebSocket messages and sends messages to connected clients.
+
+### Initializing WebSocket Server
+
+The WebSocket server is initialized in the `server.js` file:
+
+```javascript
+import { initializeWebSocketServer } from './websocket.js';
+
+const server = app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+  initializeWebSocketServer(server);
+});
+```
+
+### Handling Incoming WebSocket Messages
+
+To handle incoming WebSocket messages, use the `handleIncomingWebSocketMessages` function:
+
+```javascript
+import { handleIncomingWebSocketMessages } from './websocket.js';
+
+handleIncomingWebSocketMessages((message) => {
+  console.log('Received message:', message);
+  // Handle the incoming message
+});
+```
+
+### Sending WebSocket Messages to Clients
+
+To send messages to connected clients, use the `sendWebSocketMessageToClients` function:
+
+```javascript
+import { sendWebSocketMessageToClients } from './websocket.js';
+
+function sendMessageToClients(message) {
+  sendWebSocketMessageToClients(message);
+}
+```

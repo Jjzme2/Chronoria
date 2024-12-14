@@ -2,6 +2,20 @@
 import HelloWorld from './components/HelloWorld.vue'
 import Register from './components/Register.vue'
 import Logout from './components/Logout.vue'
+import { initializeWebSocket, sendMessage, handleIncomingMessages } from './websocket.js'
+
+const websocketUrl = 'ws://localhost:8080';
+initializeWebSocket(websocketUrl);
+
+function sendWebSocketMessage(message) {
+  sendMessage(message);
+}
+
+function onWebSocketMessage(data) {
+  console.log('Received message:', data);
+}
+
+handleIncomingMessages(onWebSocketMessage);
 </script>
 
 <template>

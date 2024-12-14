@@ -16,7 +16,7 @@ import {
 } from "./middleware/requestLogger.js";
 
 import mainRoutes from "./routes/index.js";
-
+import { initializeWebSocketServer, handleIncomingWebSocketMessages, sendWebSocketMessageToClients } from "./websocket.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -72,6 +72,16 @@ app.use((err, req, res, next) => {
 //   res.json({ message: 'Protected route' });
 // });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);
+	initializeWebSocketServer(server);
 });
+
+handleIncomingWebSocketMessages((message) => {
+	console.log('Received message:', message);
+	// Handle the incoming message
+});
+
+function sendMessageToClients(message) {
+	sendWebSocketMessageToClients(message);
+}

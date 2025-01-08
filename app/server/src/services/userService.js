@@ -196,6 +196,7 @@ const userService = {
       username: user.username,
       email: user.email,
       application_role: user.application_role,
+      refreshTokenExp: Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60) // 7 days
     });
   },
 
@@ -210,6 +211,7 @@ const userService = {
 	  username: user.username,
 	  email: user.email,
 	  application_role: user.application_role,
+	  refreshTokenExp: Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60) // 7 days
 	});
 },
 

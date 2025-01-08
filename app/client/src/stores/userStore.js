@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { refreshAccessToken, logout } from '@/utils/authUtils';
+import { refreshAccessToken, logout, decodeJwt } from '@/utils/authUtils';
 
 export const useUserStore = defineStore("users", {
   state: () => ({
@@ -39,6 +39,8 @@ export const useUserStore = defineStore("users", {
         }
         const user = await response.json();
         this.currentUser = user.decoded;
+        localStorage.setItem('accessToken', user.accessToken);
+        await this.getRefreshToken();
       } catch (error) {
         console.error("Error logging in:", error);
       }

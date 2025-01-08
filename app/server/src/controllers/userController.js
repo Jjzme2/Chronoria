@@ -56,6 +56,7 @@ const userController = {
       return res.json({
         message: "Login successful",
         decoded: decoded,
+        accessToken: accessToken,
         redirectUrl: "/",
       });
     } catch (error) {

@@ -7,6 +7,9 @@ import userRoutes from "./api/user.js";
 const router = Router();
 
 // Aggregate routes
+router.get("/", (req, res) => {
+	res.redirect("/devcenter");
+});
 router.use("/devcenter", devRoutes);
 // router.use("/api", apiRoutes);
 router.use("/api/user", userRoutes);

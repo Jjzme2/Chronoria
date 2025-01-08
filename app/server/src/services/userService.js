@@ -1,22 +1,30 @@
 import { pool } from "../utils/dbUtil.js";
 import bcrypt from "bcrypt";
-import { generateToken } from "../utils/jwtUtils.js";
+import jwtUtils from "../utils/jwtUtils.js";
+import User from "../models/User.js";
 
 const userService = {
   /**
-   * Returns an empty user object
+   * List all users
+   * @returns {Array} - List of user objects
+   * @throws {Error} - Throws an error if the query fails
    */
-  emptyUser() {
-    return {
-      id: 0,
-      username: "",
-      email: "",
-      password: "",
-      applicationRoleId: "12a3bdaa-7880-4705-a59d-c06a7dade9af",
-      createdAt: "",
-      updatedAt: "",
-      active: false,
-    };
+  async list() {
+    try {
+      const result = await pool.query(`
+        SELECT *
+        FROM users
+      `);
+      const arr = result.rows;
+	  let objArr = [];
+	  for(let item of arr) {
+		objArr.push(new User(item));
+	  }
+	  return objArr;
+	  } catch (error) {
+      console.error("Error listing users:", error);
+      throw error;
+    }
   },
 
   /**
@@ -30,7 +38,7 @@ const userService = {
         `
         SELECT u.*, ar.name AS application_role
         FROM users u
-        LEFT JOIN application_roles ar ON u.application_role = ar.id
+        LEFT JOIN application_roles ar ON u.application_role_id = ar.id
         WHERE u.username = $1
         `,
         [username]
@@ -183,12 +191,20 @@ const userService = {
    * @returns {string} - The JWT
    */
   generateUserToken(user) {
-    return generateToken({
+    return jwtUtils.generateToken({
       id: user.id,
       username: user.username,
       email: user.email,
-      application_role: user.application_role_id,
+      application_role: user.application_role,
     });
+  },
+
+  verifyPassword(plainTextPassword, hashedPassword) {
+    if (!plainTextPassword || !hashedPassword) {
+      return false;
+    }
+
+    return bcrypt.compare(plainTextPassword, hashedPassword);
   },
 };
 

@@ -1,7 +1,12 @@
 import { Router } from "express";
-import { generateToken } from "../../utils/jwtUtils.js";
-import bcrypt from "bcrypt"; // For secure password hashing
+
+
+// Controllers
 import userController from "../../controllers/userController.js";
+import classController from "../../controllers/classController.js"
+import characterController from "../../controllers/characterController.js";
+
+
 
 const router = Router();
 
@@ -13,6 +18,20 @@ router.get("/", (req, res) => {
 
 	res.render("index", { title: "Developer Dashboard" });
 });
+
+// *Testing and Gets
+router.get("/getUsers", (req, res) => {
+	userController.getAll(req, res);
+})
+
+router.get("/getClasses", (req, res) => {
+	classController.getAll(req, res);
+})
+
+router.get("/getCharacters", (req, res) => {
+	characterController.getAll(req, res);
+})
+
 
 // Login routes
 router.get("/login", (req, res) => {
@@ -31,5 +50,6 @@ router.post("/login", userController.login);
 router.post("/register", userController.createUser);
 
 router.post("/logout", userController.logout);
+
 
 export default router;

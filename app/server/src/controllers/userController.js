@@ -1,6 +1,19 @@
 import userService from "../services/userService.js";
+import jwtUtils from "../utils/jwtUtils.js";
 
 const userController = {
+  /**
+   * Returns a list of all the users
+    */
+   async getAll(req, res) {
+	try{
+		res.json(await userService.list());
+	}
+	catch(error){
+      console.error("getAll error:", error.message);
+      res.status(500).json({ error: "Internal server error", message: error.message });	}
+   },
+
   /**
    * Handle user login
    */
@@ -19,7 +32,15 @@ const userController = {
       }
 
       const token = userService.generateUserToken(user);
-      res.json({ token });
+
+	//   Get the data from the token
+	  const decoded = jwtUtils.decodeToken(token);
+
+    return res.json({
+      token: token,
+	  decoded: decoded,
+      redirectUrl: "/",
+    });
     } catch (error) {
       console.error("Login error:", error.message);
       res.status(500).json({ error: "Internal server error", message: error.message });

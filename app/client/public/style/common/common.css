@@ -1,0 +1,276 @@
+/* ----------------------------------------
+   Global Styles & Resets
+---------------------------------------- */
+#app {
+  font-family: var(--primary-font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}
+
+body {
+  background-color: var(--primary-background-color);
+}
+
+a {
+  color: var(--primary-link-color);
+  text-decoration: none;
+}
+
+/* ----------------------------------------
+   Headings
+---------------------------------------- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--secondary-font-family);
+  font-weight: 400;
+  margin: 1rem 0;
+}
+
+/* ----------------------------------------
+   Background Colors
+---------------------------------------- */
+.background-color-primary {
+  background-color: var(--primary-background-color);
+}
+
+.background-color-secondary {
+  background-color: var(--secondary-background-color);
+}
+
+.no-background {
+  background-color: transparent;
+}
+
+/* ----------------------------------------
+   Utility Classes
+---------------------------------------- */
+.boxed {
+  border: 1px solid var(--primary-border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+}
+
+/* ----------------------------------------
+   Text Colors
+---------------------------------------- */
+.colored-text-primary {
+  color: var(--primary-text-color);
+}
+
+.colored-text-secondary {
+  color: var(--secondary-text-color);
+}
+
+/* ----------------------------------------
+   Containers
+---------------------------------------- */
+.container {
+  max-width: 35vw;
+  height: auto;
+  margin: 0 auto;
+  padding: 1vh 1vw;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.container.v-small {
+  max-width: 2.5vw;
+}
+
+.container.wide {
+	max-width: 65vw;
+}
+
+/* ----------------------------------------
+   Divider
+---------------------------------------- */
+.divider {
+  border: none;
+  height: 3px;
+  margin: 2rem auto;
+  background: linear-gradient(to right, var(--mint), var(--dark-slate-gray));
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  width: 45%;
+}
+
+/* ----------------------------------------
+   Flexbox Utilities
+---------------------------------------- */
+.flex {
+  display: flex;
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+.horizontal {
+  flex-direction: row;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+/* ----------------------------------------
+   Heights
+---------------------------------------- */
+.height-min-50 {
+  min-height: 50vh;
+}
+
+.height-min-100 {
+  min-height: 100vh;
+}
+
+/* ----------------------------------------
+   Icon Styling
+---------------------------------------- */
+.icon {
+  width: 50%;
+  height: auto;
+  border-radius: 1.5vh;
+  transition: transform 0.3s ease;
+}
+
+/* ----------------------------------------
+   Shadows and Effects
+---------------------------------------- */
+.pop {
+  box-shadow: var(--box-shadow);
+}
+
+.flatten {
+  box-shadow: none;
+}
+
+.inset {
+  box-shadow: inset 3px 3px 10px rgba(251, 255, 0, 0.733);
+}
+
+/* ----------------------------------------
+   Typography - Text Sizes
+---------------------------------------- */
+.mini-text {
+  font-size: 0.75rem;
+}
+
+.sm-text {
+  font-size: 0.85rem;
+}
+
+.med-text {
+  font-size: 1.5rem;
+}
+
+.large-text {
+  font-size: 2rem;
+}
+
+/* ----------------------------------------
+   Table Styling
+---------------------------------------- */
+.common-table {
+  border-collapse: collapse;
+  margin: 1rem auto;
+  width: 100%;
+}
+
+.common-table th {
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.common-table td {
+  border: 1px solid var(--primary-border-color);
+  color: var(--primary-text-color);
+  font-size: 1.25rem;
+  padding: 1rem;
+}
+
+/* ----------------------------------------
+   Width Utilities
+---------------------------------------- */
+.width-full {
+  width: 100%;
+}
+
+.width-half {
+  width: 50%;
+}
+
+.width-third {
+  width: 33%;
+}
+
+/* ----------------------------------------
+   Loading Icon
+---------------------------------------- */
+.loading-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.loading-icon__spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #333;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1.5s linear infinite;
+}
+
+/* ----------------------------------------
+   Margins
+---------------------------------------- */
+.margin-top-1 {
+  margin-top: 1rem;
+}
+
+.margin-top-2 {
+  margin-top: 2rem;
+}
+
+.margin-top-3 {
+  margin-top: 3rem;
+}
+
+.margin-top-5 {
+  margin-top: 5rem;
+}
+
+.margin-top-10 {
+  margin-top: 10rem;
+}
+
+/* ----------------------------------------
+SHADOWS
+---------------------------------------- */
+
+.no-shadow {
+  box-shadow: none !important;
+}

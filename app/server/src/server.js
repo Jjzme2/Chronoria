@@ -57,14 +57,15 @@ app.use(requestLogger);
 
 app.use("/", mainRoutes);
 
-// ! DELETE: Examples
-// app.get('/api', (req, res) => {
-//   res.json({ message: 'Hello from server!' });
-// });
 
-// app.get('/api/protected', passport.authenticate('jwt', { session: false }), (req, res) => {
-//   res.json({ message: 'Protected route' });
-// });
+	// Serve static files from the client build folder
+	const clientPath = path.join(__dirname, "../../client/dist");
+	app.use(express.static(clientPath));
+
+	// Serve the client index.html file for any unknown route
+	app.get("*", (req, res) => {
+		res.sendFile(path.join(clientPath, "index.html"));
+	});
 
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);

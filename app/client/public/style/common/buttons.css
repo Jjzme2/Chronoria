@@ -1,0 +1,89 @@
+/* Button Group */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem; /* Increased gap for better spacing */
+  padding: 1rem; /* Added padding to prevent button crowding */
+}
+
+/* General Button Styles */
+.button {
+  padding: 1vh 2vw; /* Adjusted for better visual balance */
+  border: none;
+  border-radius: 8px; /* Use pixels for consistency across devices */
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease; /* Added smooth scaling */
+  width: 7.5vw;
+  max-width: 15vw; /* Increased max width */
+  font-size: 1rem; /* Standard font size */
+  font-weight: 600; /* Slightly bolder text for clarity */
+  color: var(--button-text-color, #fff); /* Fallback color if variable is missing */
+  background-color: var(--button-background-color, #333); /* Fallback background */
+  text-align: center; /* Center text in the button */
+  overflow: hidden;
+}
+
+/* Hover Effects */
+.button:hover {
+  background-color: var(--button-hover-color, #555); /* Fallback hover background */
+  color: var(--hover-text-color, #fff); /* Fallback hover text color */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Deeper shadow for a richer effect */
+  transform: translateY(-2px); /* Adds a subtle lift effect */
+}
+
+/* Button Focus for Accessibility */
+.button:focus {
+  outline: 3px solid var(--focus-color, #00bfff); /* Focus ring for keyboard users */
+  outline-offset: 2px;
+}
+
+/* Button Active State */
+.button:active {
+  background-color: var(--button-active-color, #222); /* Darker active state */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Softer shadow on press */
+  transform: translateY(0); /* No lift effect on click */
+}
+
+/* Primary Button */
+.button.primary {
+  background-color: var(--primary-button-color, #007bff); /* Fallback primary color */
+  color: var(--primary-text-color, #fff); /* Fallback text color */
+}
+
+.button.primary:hover {
+  background-color: var(--primary-button-hover-color, #0056b3); /* Fallback hover */
+}
+
+/* Secondary Button */
+.button.secondary {
+  background-color: var(--secondary-button-color, #6c757d); /* Fallback secondary color */
+  color: var(--secondary-text-color, #fff); /* Fallback text color */
+}
+
+.button.secondary:hover {
+  background-color: var(--secondary-button-hover-color, #5a6268); /* Fallback hover */
+}
+
+/* Disabled Button */
+.button:disabled {
+  background-color: var(--disabled-button-color, #e0e0e0); /* Gray-out disabled buttons */
+  color: var(--disabled-text-color, #a0a0a0);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Adjustments for small to medium screens */
+@media (max-width: 768px) {
+  .button-group {
+    width: 100%;
+  }
+
+  .button {
+    width: 20vw;
+    max-width: 30vw;
+  }
+}

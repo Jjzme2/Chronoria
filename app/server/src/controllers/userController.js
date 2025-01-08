@@ -1,18 +1,19 @@
 import userService from "../services/userService.js";
 import jwtUtils from "../utils/jwtUtils.js";
+import { setCookie } from "../utils/cookieUtils.js"; // New utility to handle cookie setting
 
 const userController = {
   /**
    * Returns a list of all the users
-    */
-   async getAll(req, res) {
-	try{
-		res.json(await userService.list());
-	}
-	catch(error){
+   */
+  async getAll(req, res) {
+    try {
+      res.json(await userService.list());
+    } catch (error) {
       console.error("getAll error:", error.message);
-      res.status(500).json({ error: "Internal server error", message: error.message });	}
-   },
+      res.status(500).json({ error: "Internal server error", message: error.message });
+    }
+  },
 
   /**
    * Handle user login
@@ -31,16 +32,32 @@ const userController = {
         return res.status(403).json({ error: "Account is inactive" });
       }
 
-      const token = userService.generateUserToken(user);
+      // Generate access and refresh tokens
+      const accessToken = userService.generateUserToken(user); // Short-lived token
+      const refreshToken = userService.generateRefreshToken(user); // Long-lived refresh token
 
-	//   Get the data from the token
-	  const decoded = jwtUtils.decodeToken(token);
+      // Set tokens in HttpOnly cookies (Ensure cookieUtils.js is implemented)
+      setCookie(res, "accessToken", accessToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+        maxAge: 15 * 60 * 1000,
+      }); // 15 minutes
+      setCookie(res, "refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      }); // 7 days
 
-    return res.json({
-      token: token,
-	  decoded: decoded,
-      redirectUrl: "/",
-    });
+      // Decode the access token for the client-side
+      const decoded = jwtUtils.decodeToken(accessToken);
+
+      return res.json({
+        message: "Login successful",
+        decoded: decoded,
+        redirectUrl: "/",
+      });
     } catch (error) {
       console.error("Login error:", error.message);
       res.status(500).json({ error: "Internal server error", message: error.message });
@@ -58,7 +75,7 @@ const userController = {
       const newUser = await userService.createUser({
         username,
         password,
-		email,
+        email,
       });
       res.status(201).json(newUser);
     } catch (error) {
@@ -127,12 +144,51 @@ const userController = {
    */
   async logout(req, res) {
     try {
-      // Example logout logic: clear the session or token
-      req.session = null; // Adjust this if you’re not using sessions
+      // Clear both access and refresh tokens from the cookies
+      res.clearCookie("accessToken", { httpOnly: true, secure: true, sameSite: "Strict" });
+      res.clearCookie("refreshToken", { httpOnly: true, secure: true, sameSite: "Strict" });
+
       res.json({ message: "Logout successful" });
     } catch (error) {
       console.error("Logout error:", error.message);
       res.status(500).json({ error: "Failed to logout" });
+    }
+  },
+
+  /**
+   * Refresh the access token using the refresh token stored in cookies
+   */
+  async refreshToken(req, res) {
+    const refreshToken = req.cookies.refreshToken;
+
+    if (!refreshToken) {
+      return res.status(401).json({ error: "Refresh token is missing or expired" });
+    }
+
+    try {
+      // Verify the refresh token and generate a new access token
+      const decoded = jwtUtils.verifyRefreshToken(refreshToken);
+      const user = await userService.findById(decoded.id);
+
+      if (!user) {
+        return res.status(401).json({ error: "User not found" });
+      }
+
+      const newAccessToken = userService.generateUserToken(user);
+      setCookie(res, "accessToken", newAccessToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+        maxAge: 15 * 60 * 1000,
+      }); // 15 minutes
+
+      return res.json({
+        message: "Access token refreshed",
+        accessToken: newAccessToken,
+      });
+    } catch (error) {
+      console.error("Refresh token error:", error.message);
+      res.status(403).json({ error: "Invalid refresh token" });
     }
   },
 };

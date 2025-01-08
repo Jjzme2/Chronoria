@@ -7,9 +7,7 @@ import userRoutes from "./api/user.js";
 const router = Router();
 
 // Aggregate routes
-router.get("/", (req, res) => {
-	res.redirect("/devcenter");
-});
+// Later on, DevCenter should only be accessible by admins
 router.use("/devcenter", devRoutes);
 // router.use("/api", apiRoutes);
 router.use("/api/user", userRoutes);

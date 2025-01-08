@@ -1,0 +1,42 @@
+/* Sizes */
+.text-lg {
+  font-size: 2vw;
+}
+
+.text-med {
+  font-size: 1.75vw;
+}
+
+.text-sm {
+  font-size: 0.85vw;
+}
+
+/* Colors */
+
+.text-gray-dark {
+  color: var(--dark-gray);
+}
+
+.text-gray-dark-2 {
+  color: var(--dark-slate-gray);
+}
+
+.text-gray-light {
+  color: var(--light-gray);
+}
+
+.text-gray-med {
+  color: var(--med-gray);
+}
+
+.text-mint {
+  color: var(--mint);
+}
+
+.text-purple {
+  color: var(--dark-purple);
+}
+
+.text-white {
+  color: var(--white);
+}

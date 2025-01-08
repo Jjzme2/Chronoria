@@ -199,6 +199,20 @@ const userService = {
     });
   },
 
+  /**
+   * Generate a Refresh Token for a user
+   * @param {Object} user - The user object
+   * @returns {string} - The Refresh Token
+   */
+  generateRefreshToken(user) {
+	return jwtUtils.generateRefreshToken({
+	  id: user.id,
+	  username: user.username,
+	  email: user.email,
+	  application_role: user.application_role,
+	});
+},
+
   verifyPassword(plainTextPassword, hashedPassword) {
     if (!plainTextPassword || !hashedPassword) {
       return false;

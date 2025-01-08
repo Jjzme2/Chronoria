@@ -1,0 +1,61 @@
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+
+:root {
+  /* General colors */
+  --white: #ffffff;
+  --dark-slate-gray: #243e36;
+  --dark-purple: #32021f;
+  --mint: #65b891;
+  --light-gray: #e0e0e0;
+  --med-gray: #7e7e7e;
+  --dark-gray: #333333;
+
+  /* Transparent Colors */
+  --transparent-green: rgba(101, 184, 145, 0.5);
+  --transparent-mint: rgba(101, 184, 145, 0.85);
+
+  /* Typography */
+  --font-primary: 'Montserrat', serif;
+  --font-secondary: 'Oswald', sans-serif;
+
+  /* Buttons */
+  --primary-button-color: var(--mint);
+  --secondary-button-color: var(--dark-purple);
+  --button-hover-color: var(--light-gray);
+  --button-text-color: var(--white);
+
+  /* Primary color scheme */
+  --primary-background-color: var(--med-gray);
+  --primary-font-family: var(--font-primary);
+  --primary-panel-color: var(transparent-green);
+  --primary-text-color: var(--dark-slate-gray);
+  --primary-border-color: var(--mint);
+  --primary-link-color: var(--dark-purple);
+
+  /* Secondary color scheme */
+  --secondary-background-color: var(--dark-slate-gray);
+  --secondary-font-family: var(--font-secondary);
+  --secondary-panel-color: var(--mint);
+  --secondary-text-color: var(--white);
+
+  /* Main Content color scheme */
+  --main-content-background-color: var(--mint);
+
+  /* Padding  */
+  --padding-small: 0.5rem;
+  --padding-medium: 1rem;
+  --padding-large: 2rem;
+
+  /* Card color scheme */
+
+  /* Border radius */
+  --border-radius: 5px;
+
+  /* Box shadow */
+  --box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+
+  /* Transition */
+  --transition: 0.3s;
+}

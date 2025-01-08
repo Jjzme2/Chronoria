@@ -1,0 +1,35 @@
+.card {
+  border-radius: 1.5vh; /* Make border radius scalable based on height */
+  box-shadow: 0 0.5vh 1.5vh rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  text-align: center;
+  padding: 3vh 2vw; /* Use viewport units for padding */
+  max-width: 60vw; /* Max width based on the viewport width */
+  margin: 2vh; /* Vertical margin for better responsiveness  */
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-inner {
+  max-width: 95%;
+  overflow: hidden;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.card .cover-image {
+  width: 50%;
+  height: auto; /* Adjust for better visual proportions */
+  object-fit: cover; /* Ensure image fits well in the container */
+  border-radius: 10px;
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}

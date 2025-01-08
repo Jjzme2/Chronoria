@@ -1,0 +1,31 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates a grid with 3 equal-width columns */
+  grid-gap: 10px; /* Adds a gap between grid items */
+  align-items: center;
+  margin: 2.5vw;
+}
+
+.grid-container-lg {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* Creates a grid with 4 equal-width columns */
+  grid-gap: 10px; /* Adds a gap between grid items */
+}
+
+.grid-item {
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.library-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  width: fit-content;
+  padding: 10px;
+  justify-items: center;
+  justify-content: center;
+  align-content: center;
+}

@@ -1,0 +1,26 @@
+.shine-text {
+  background: linear-gradient(90deg, var(--mint), var(--dark-purple), var(--mint));
+  background-size: 200% 200%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 5s linear infinite;
+}
+
+@keyframes shine {
+  from {
+    background-position: 200% 200%;
+  }
+  to {
+    background-position: -200% -200%;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

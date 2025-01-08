@@ -22,5 +22,9 @@ const password = ref('');
 
 const login = async () => {
   await userStore.login(username.value, password.value);
+  const accessToken = localStorage.getItem('accessToken');
+  if (accessToken) {
+    await userStore.getRefreshToken();
+  }
 };
 </script>

@@ -1,18 +1,19 @@
 import { pool } from "../utils/dbUtil.js";
+import logger from "../utils/logger.js";
 
-const templateService = {
+const placeholderService = {
   /**
-   * Create a new template
-   * @param {Object} templateData - The template data
-   * @param {string} templateData.name
-   * @param {string} templateData.description
-   * @returns {Object} - The created template
+   * Create a new placeholder
+   * @param {Object} placeholderData - The placeholder data
+   * @param {string} placeholderData.name
+   * @param {string} placeholderData.description
+   * @returns {Object} - The created placeholder
    */
-  async createTemplate({ name, description }) {
+  async createPlaceholder({ name, description }) {
     try {
       const result = await pool.query(
         `
-        INSERT INTO templates (name, description)
+        INSERT INTO placeholders (name, description)
         VALUES ($1, $2)
         RETURNING id, name, description, created_at, updated_at
         `,
@@ -21,40 +22,40 @@ const templateService = {
 
       return result.rows[0];
     } catch (error) {
-      console.error("Error creating template:", error);
+      logger.error("Error creating placeholder:", error);
       throw error;
     }
   },
 
   /**
-   * Fetch a template by ID
-   * @param {string} id - The template ID
-   * @returns {Object|null} - The template object or null if not found
+   * Fetch a placeholder by ID
+   * @param {string} id - The placeholder ID
+   * @returns {Object|null} - The placeholder object or null if not found
    */
   async findById(id) {
     try {
       const result = await pool.query(
         `
         SELECT id, name, description, created_at, updated_at
-        FROM templates
+        FROM placeholders
         WHERE id = $1
         `,
         [id]
       );
       return result.rows[0] || null;
     } catch (error) {
-      console.error("Error fetching template by ID:", error);
+      logger.error("Error fetching placeholder by ID:", error);
       throw error;
     }
   },
 
   /**
-   * Update a template
-   * @param {string} id - The template ID
+   * Update a placeholder
+   * @param {string} id - The placeholder ID
    * @param {Object} updates - The fields to update
-   * @returns {Object} - The updated template
+   * @returns {Object} - The updated placeholder
    */
-  async updateTemplate(id, updates) {
+  async updatePlaceholder(id, updates) {
     const { name, description } = updates;
 
     try {
@@ -74,7 +75,7 @@ const templateService = {
 
       values.push(id); // Add the ID as the last parameter
       const query = `
-        UPDATE templates
+        UPDATE placeholders
         SET ${fields.join(", ")}
         WHERE id = $${index}
         RETURNING id, name, description, created_at, updated_at
@@ -83,25 +84,25 @@ const templateService = {
       const result = await pool.query(query, values);
       return result.rows[0];
     } catch (error) {
-      console.error("Error updating template:", error);
+      logger.error("Error updating placeholder:", error);
       throw error;
     }
   },
 
   /**
-   * Delete a template
-   * @param {string} id - The template ID
-   * @returns {boolean} - True if the template was deleted, false otherwise
+   * Delete a placeholder
+   * @param {string} id - The placeholder ID
+   * @returns {boolean} - True if the placeholder was deleted, false otherwise
    */
-  async deleteTemplate(id) {
+  async deletePlaceholder(id) {
     try {
-      const result = await pool.query(`DELETE FROM templates WHERE id = $1 RETURNING id`, [id]);
+      const result = await pool.query(`DELETE FROM placeholders WHERE id = $1 RETURNING id`, [id]);
       return result.rowCount > 0;
     } catch (error) {
-      console.error("Error deleting template:", error);
+      logger.error("Error deleting placeholder:", error);
       throw error;
     }
   },
 };
 
-export default templateService;
+export default placeholderService;

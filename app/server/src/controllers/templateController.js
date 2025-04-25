@@ -1,78 +1,87 @@
-import templateService from "../services/templateService.js";
+import placeholderService from "../services/placeholderService.js";
+import logger from "../utils/logger.js";
 
-const templateController = {
+const placeholderController = {
   /**
-   * Create a new template
+   * Create a new placeholder
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
    */
-  async createTemplate(req, res) {
+  async createPlaceholder(req, res) {
     const { name, description } = req.body;
 
     try {
-      const newTemplate = await templateService.createTemplate({
+      const newPlaceholder = await placeholderService.createPlaceholder({
         name,
         description,
       });
-      res.status(201).json(newTemplate);
+      res.status(201).json(newPlaceholder);
     } catch (error) {
-      console.error("Template creation error:", error.message);
-      res.status(500).json({ error: "Failed to create template", message: error.message });
+      logger.error("Placeholder creation error:", error.message);
+      res.status(500).json({ error: "Failed to create placeholder", message: error.message });
     }
   },
 
   /**
-   * Fetch template by ID
+   * Fetch placeholder by ID
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
    */
-  async getTemplateById(req, res) {
+  async getPlaceholderById(req, res) {
     const { id } = req.params;
 
     try {
-      const template = await templateService.findById(id);
-      if (!template) {
-        return res.status(404).json({ error: "Template not found" });
+      const placeholder = await placeholderService.findById(id);
+      if (!placeholder) {
+        return res.status(404).json({ error: "Placeholder not found" });
       }
-      res.json(template);
+      res.json(placeholder);
     } catch (error) {
-      console.error("Error fetching template:", error.message);
+      logger.error("Error fetching placeholder:", error.message);
       res.status(500).json({ error: "Internal server error" });
     }
   },
 
   /**
-   * Update a template
+   * Update a placeholder
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
    */
-  async updateTemplate(req, res) {
+  async updatePlaceholder(req, res) {
     const { id } = req.params;
     const updates = req.body;
 
     try {
-      const updatedTemplate = await templateService.updateTemplate(id, updates);
-      if (!updatedTemplate) {
-        return res.status(404).json({ error: "Template not found" });
+      const updatedPlaceholder = await placeholderService.updatePlaceholder(id, updates);
+      if (!updatedPlaceholder) {
+        return res.status(404).json({ error: "Placeholder not found" });
       }
-      res.json(updatedTemplate);
+      res.json(updatedPlaceholder);
     } catch (error) {
-      console.error("Error updating template:", error.message);
-      res.status(500).json({ error: "Failed to update template" });
+      logger.error("Error updating placeholder:", error.message);
+      res.status(500).json({ error: "Failed to update placeholder" });
     }
   },
 
   /**
-   * Delete a template
+   * Delete a placeholder
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
    */
-  async deleteTemplate(req, res) {
+  async deletePlaceholder(req, res) {
     const { id } = req.params;
 
     try {
-      const isDeleted = await templateService.deleteTemplate(id);
+      const isDeleted = await placeholderService.deletePlaceholder(id);
       if (!isDeleted) {
-        return res.status(404).json({ error: "Template not found" });
+        return res.status(404).json({ error: "Placeholder not found" });
       }
-      res.json({ message: "Template deleted successfully" });
+      res.json({ message: "Placeholder deleted successfully" });
     } catch (error) {
-      console.error("Error deleting template:", error.message);
-      res.status(500).json({ error: "Failed to delete template" });
+      logger.error("Error deleting placeholder:", error.message);
+      res.status(500).json({ error: "Failed to delete placeholder" });
     }
   },
 };
 
-export default templateController;
+export default placeholderController;

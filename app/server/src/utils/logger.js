@@ -1,4 +1,5 @@
 import { createLogger, format, transports } from "winston";
+import { pool } from "./dbUtil.js";
 const { combine, timestamp, printf, colorize } = format;
 
 // Define the log format
@@ -6,6 +7,13 @@ const logFormat = printf(({ level, message, timestamp }) => {
 	return `${timestamp} [${level}]: ${message}`;
 });
 
+/**
+ * Logger object for logging messages with different levels
+ * @type {Object}
+ * @property {Function} info - Log an info message
+ * @property {Function} error - Log an error message
+ * @property {Function} warn - Log a warning message
+ */
 const logger = createLogger({
 	level: "info", // Log level (info, error, warn, etc.)
 	format: combine(
@@ -30,6 +38,18 @@ const logger = createLogger({
 		}),
 		new transports.File({
 			filename: `logs/combined-${new Date().toISOString().split("T")[0]}.log`,
+		}),
+		new transports.Stream({
+			stream: {
+				write: async (message) => {
+					const logEntry = JSON.parse(message);
+					const { level, message: logMessage, timestamp } = logEntry;
+					await pool.query(
+						"INSERT INTO logs (level, message, timestamp) VALUES ($1, $2, $3)",
+						[level, logMessage, timestamp]
+					);
+				},
+			},
 		}),
 	],
 });

@@ -5,7 +5,10 @@ dotenv.config();
 
 const { Pool } = pg;
 
-// Configure the PostgreSQL connection
+/**
+ * Configure the PostgreSQL connection
+ * @type {Pool}
+ */
 const pool = new Pool({
   user: process.env.DB_USER || "postgres",
   host: process.env.DB_HOST || "localhost",

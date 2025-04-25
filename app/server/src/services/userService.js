@@ -1,10 +1,12 @@
 import { pool } from "../utils/dbUtil.js";
 import bcrypt from "bcrypt";
 import { generateToken } from "../utils/jwtUtils.js";
+import logger from "../utils/logger.js";
 
 const userService = {
   /**
    * Returns an empty user object
+   * @returns {Object} - The empty user object
    */
   emptyUser() {
     return {
@@ -37,7 +39,7 @@ const userService = {
       );
       return result.rows[0] || null;
     } catch (error) {
-      console.error("Error fetching user by username:", error);
+      logger.error("Error fetching user by username:", error);
       throw error;
     }
   },
@@ -60,7 +62,7 @@ const userService = {
       );
       return result.rows[0] || null;
     } catch (error) {
-      console.error("Error fetching user by ID:", error);
+      logger.error("Error fetching user by ID:", error);
       throw error;
     }
   },
@@ -91,7 +93,7 @@ const userService = {
 
       return result.rows[0];
     } catch (error) {
-      console.error("Error creating user:", error);
+      logger.error("Error creating user:", error);
       throw error;
     }
   },
@@ -140,7 +142,7 @@ const userService = {
       const result = await pool.query(query, values);
       return result.rows[0];
     } catch (error) {
-      console.error("Error updating user:", error);
+      logger.error("Error updating user:", error);
       throw error;
     }
   },
@@ -155,7 +157,7 @@ const userService = {
       const result = await pool.query(`DELETE FROM users WHERE id = $1 RETURNING id`, [id]);
       return result.rowCount > 0;
     } catch (error) {
-      console.error("Error deleting user:", error);
+      logger.error("Error deleting user:", error);
       throw error;
     }
   },
@@ -172,7 +174,7 @@ const userService = {
       ]);
       return result.rows[0]?.id || null;
     } catch (error) {
-      console.error("Error fetching application role ID:", error);
+      logger.error("Error fetching application role ID:", error);
       throw error;
     }
   },
